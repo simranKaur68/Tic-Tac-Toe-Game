@@ -40,6 +40,7 @@ boxes.forEach((box)=>{
 const reset = () =>{
     turnO = true;
     enableBoxes();
+    removeHighlight();
     msgContainer.classList.add("hide");
 
 }
@@ -56,9 +57,16 @@ const enableBoxes = () =>{
     for(let box of boxes){
         box.disabled = false;
         box.innerText = "";
+        box.classList.remove("highlight")
     }
 
 };
+
+const removeHighlight=()=>{
+    for(let box of boxes){
+        box.classList.remove("highlight");
+    }
+}
 
 
 const showWinner = (winner)=>{
@@ -73,11 +81,22 @@ const checkWinner = ()=>{
        let pos1Val = boxes[pattern[0]].innerText;
        let pos2Val = boxes[pattern[1]].innerText;
        let pos3Val = boxes[pattern[2]].innerText;
+       let b1 = boxes[pattern[0]];
+       let b2 = boxes[pattern[1]];
+       let b3 = boxes[pattern[2]];
+
 
        if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
         if(pos1Val === pos2Val && pos2Val === pos3Val){
             console.log(`Winner is ${pos1Val}`);
-            showWinner(pos1Val);
+            b1.classList.add("highlight");
+            b2.classList.add("highlight");
+            b3.classList.add("highlight");
+            setTimeout(()=>{
+                showWinner(pos1Val);   
+            },2000);
+            
+            
         }
        } 
 

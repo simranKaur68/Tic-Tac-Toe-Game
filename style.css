@@ -79,6 +79,12 @@ h1 {
     display: none;
 }
 
+.highlight{
+    background-color: lightgoldenrodyellow;
+    color: #c83349;
+    transition: all 1s ease-out;
+}
+
 @media (max-width : 1070px) {
     .container {
         height: 68vh;
