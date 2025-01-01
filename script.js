@@ -21,8 +21,6 @@ const winPattern = [
 boxes.forEach((box)=>{
    box.addEventListener("click",()=>{
 
-    console.log("Box is clicked");
-
      if(turnO){
         box.innerText = "O";
         turnO = false;
@@ -88,7 +86,6 @@ const checkWinner = ()=>{
 
        if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
         if(pos1Val === pos2Val && pos2Val === pos3Val){
-            console.log(`Winner is ${pos1Val}`);
             b1.classList.add("highlight");
             b2.classList.add("highlight");
             b3.classList.add("highlight");
