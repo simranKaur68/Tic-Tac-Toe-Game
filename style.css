@@ -1,143 +1,210 @@
+/* 
+  GLOBAL RESETS & VARIABLES
+  -------------------------------------------------- */
+
+/* Zero out margins and padding globally */
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Consider universal box-sizing for more predictable sizing */
 }
 
+/* Define reusable color variables to ensure easy theming */
+:root {
+  --color-primary: #c83349;       /* Main background color */
+  --color-secondary: #f9d5e5;     /* Box background color */
+  --color-accent: #e06377;        /* Box text color & highlights */
+  --color-btn-bg: wheat;          /* Button background color */
+  --color-btn-text: #333;         /* Button text color */
+  --color-highlight-bg: lightgoldenrodyellow;
+  --color-highlight-text: var(--color-primary);
+
+  --font-size-large: 40px;
+  --font-size-medium: 20px;
+  --font-size-small: 15px;
+  --transition-speed: 0.3s;
+}
+
+/*
+  BODY & TEXT
+  --------------------------------------------------
+*/
 body {
-    background-color: #c83349;
-    text-align: center;
+  background-color: var(--color-primary);
+  text-align: center;
+  font-family: sans-serif; /* Provide a default font family */
+  color: #fff; /* Default text color for readability on dark background */
 }
 
+/* Main title styling */
 h1 {
-    font-size: 40px;
-    margin-top: 15px;
+  font-size: var(--font-size-large);
+  margin-top: 15px;
+  text-transform: uppercase; /* Example: transform text to uppercase for emphasis */
+  letter-spacing: 2px;       /* Slight letter spacing for a modern look */
 }
 
+/*
+  LAYOUT CONTAINERS
+  --------------------------------------------------
+*/
 .container {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Optionally add a slight padding or gap */
 }
 
 .game {
-    height: 70vmin;
-    width: 70vmin;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5vmin;
+  /* Instead of strictly setting same width & height, consider max sizing. */
+  width: 70vmin;
+  height: 70vmin;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5vmin;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Center horizontally if possible */
 }
 
+/*
+  BOX / CARD STYLING
+  --------------------------------------------------
+*/
 .box {
-    height: 20vmin;
-    width: 20vmin;
-    background-color: #f9d5e5;
-    border: none;
-    border-radius: 1rem;
-    font-size: 3rem;
-    box-shadow: 0 0 3px black;
-    color: #e06377;
+  width: 20vmin;
+  height: 20vmin;
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: 1rem;
+  font-size: 3rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  color: var(--color-accent);
+  cursor: pointer; /* Indicate clickable, if these boxes are interactive */
+  transition: transform var(--transition-speed);
 }
 
+.box:hover {
+  transform: scale(1.03); /* Slight hover scale effect */
+}
+
+/*
+  BUTTONS
+  --------------------------------------------------
+*/
+.btn {
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background-color: var(--color-btn-bg);
+  color: var(--color-btn-text);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  margin: 0.5rem;
+}
+
+.btn:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Optionally keep specific classes if needed for semantics or scripting */
 .reset-btn {
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    background-color: wheat;
-    font-size: 15px;
-    font-weight: 600;
 }
 
 .new-btn {
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    background-color: wheat;
-    font-size: 15px;
-    font-weight: 600;
-    margin-top: 10px;
+  margin-top: 10px; /* Additional margin for vertical spacing */
 }
 
+/*
+  TEXT / MESSAGE DISPLAY
+  --------------------------------------------------
+*/
 .msg {
-    font-size: 40px;
-    color: #f9d5e5;
+  font-size: var(--font-size-large);
+  color: var(--color-secondary);
+  margin: 1rem 0;
 }
 
 .msg-container {
-    height: 100vmin;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 2rem;
-
+  height: 100vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .hide {
-    display: none;
+  display: none !important; /* Use !important to ensure it overrides other display rules */
 }
 
-.highlight{
-    background-color: lightgoldenrodyellow;
-    color: #c83349;
-    transition: all 1s ease-out;
+/* Highlight style for winner or interactive feedback */
+.highlight {
+  background-color: var(--color-highlight-bg);
+  color: var(--color-highlight-text);
+  transition: all 1s ease-out;
 }
 
-@media (max-width : 1070px) {
-    .container {
-        height: 68vh;
-    }
+/*
+  RESPONSIVE BREAKPOINTS
+  --------------------------------------------------
+*/
 
+/* Slightly compressed container at 1070px */
+@media (max-width: 1070px) {
+  .container {
+    height: 68vh;
+  }
 }
 
-@media (max-width : 900px) {
-    .container {
-        height: 55vh;
-    }
+@media (max-width: 900px) {
+  .container {
+    height: 55vh;
+  }
 }
 
-@media (max-width : 650px) {
-    .container {
-        height: 45vh;
-    }
+@media (max-width: 650px) {
+  .container {
+    height: 45vh;
+  }
 }
 
-
-
-@media (max-width : 1230px) {
-    .msg-container {
-        height: 150vmin;
-        position: relative;
-    }
-
-    .msg{
-        position: absolute;
-        top: 35rem;
-    }
-    
-    .new-btn{
-        position: absolute;
-        top: 40rem;
-    }
-
+/* For mid-range screens: adjusting message container */
+@media (max-width: 1230px) {
+  .msg-container {
+    height: 150vmin;
+    position: relative;
+  }
+  .msg {
+    position: absolute;
+    top: 35rem; 
+  }
+  .new-btn {
+    position: absolute;
+    top: 40rem;
+  }
 }
 
-@media (max-width : 830px) {
-    .msg-container {
-        height: 250vmin;
-        position: relative;
-    }
-
-    .msg{
-        position: absolute;
-        top: 35rem;
-    }
-    
-    .new-btn{
-        position: absolute;
-        top: 40rem;
-    }
-
+/* For narrower screens: further tweaking container */
+@media (max-width: 830px) {
+  .msg-container {
+    height: 250vmin;
+    position: relative;
+  }
+  .msg {
+    position: absolute;
+    top: 35rem;
+  }
+  .new-btn {
+    position: absolute;
+    top: 40rem;
+  }
 }
